@@ -33,11 +33,11 @@ func main() {
 		showHelp()
 		return
 	}
-	cmdName := strings.ToLower(os.Args[1])
-	if exeCmd(cmdName) {
+	cmdLine := strings.ToLower(os.Args[1])
+	if exeCmd(cmdLine) {
 		return
 	}
-	if cmdName == "bootstrap" {
+	if cmdLine == "bootstrap" {
 		bootstrap()
 		return
 	}
