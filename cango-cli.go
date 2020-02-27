@@ -79,7 +79,7 @@ func bootCmd() string {
 		return nil
 	})
 	cmdNames = cmdNames[:len(cmdNames)-2]
-	return cmdNames + "}\n"
+	return cmdNames + "}\n\n"
 }
 func bootFileMap() string {
 	files := map[string]string{}
@@ -118,7 +118,7 @@ func bootFileMap() string {
 	for _, name := range fileNames {
 		builder = builder + repeat(spaceCount) + globalFilesName + "[\"" + name + "\"] = " + files[name] + "\n"
 	}
-	return builder + "}\n"
+	return builder + "}\n\n"
 }
 
 func insertText(fullText, insertText string, textMarker marker) string {
