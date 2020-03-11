@@ -64,12 +64,6 @@ func newMarker(markerName string) marker {
 		suffix: "// end_" + markerName,
 	}
 }
-
-var (
-	cmdText     = bootCmd()
-	fileMapText = bootFileMap()
-)
-
 func bootCmd() string {
 	cmdNames := cmdMarker.prefix + "\nvar cmdArr = []string{"
 	_ = filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
@@ -86,6 +80,9 @@ func bootFileMap() string {
 	var fileNames []string
 	for _, cmdName := range cmdArr {
 		_ = filepath.Walk("./"+cmdName, func(path string, info os.FileInfo, err error) error {
+			if info == nil {
+				return nil
+			}
 			name := splash(path) + path
 			fileNames = append(fileNames, name)
 			files[name] = bytesFormat(func() []byte {
@@ -140,8 +137,8 @@ func bootstrap() {
 	if self == "" {
 		return
 	}
-	self = insertText(self, cmdText, cmdMarker)
-	self = insertText(self, fileMapText, fileMapMarker)
+	self = insertText(self, bootCmd(), cmdMarker)
+	self = insertText(self, bootFileMap(), fileMapMarker)
 	err := ioutil.WriteFile("./cango-cli.go", []byte(self), 0666)
 	if err != nil {
 		log.Println(err)
