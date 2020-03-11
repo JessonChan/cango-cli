@@ -41,6 +41,11 @@ func main() {
 		bootstrap()
 		return
 	}
+	if cmdLine == "range" {
+		for _, cl := range cmdArr {
+			exeCmd(cl)
+		}
+	}
 	showHelp()
 }
 
