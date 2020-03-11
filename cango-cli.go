@@ -45,6 +45,7 @@ func main() {
 		for _, cl := range cmdArr {
 			exeCmd(cl)
 		}
+		return
 	}
 	showHelp()
 }
