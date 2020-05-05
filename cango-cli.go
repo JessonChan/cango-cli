@@ -89,6 +89,7 @@ func bootFileMap() string {
 			if info == nil {
 				return nil
 			}
+			// 过滤隐藏文件
 			if strings.Contains(path, "/.") {
 				return nil
 			}
